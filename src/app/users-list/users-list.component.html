@@ -1,0 +1,41 @@
+<h4>Lista użytkowników</h4>
+
+<div *ngIf="isErrorOccured" class="alert alert-danger">
+    Wystąpił błąd w pobieraniu!
+</div>
+
+<div class="row">
+    <div class="col-4">
+        <button (click)="changeDisplay()" class="btn btn-secondary">
+            Zmień sposób wyświetlania
+        </button>
+    </div>
+</div>
+
+<table *ngIf="isTableOptionVisible" class="table table-hover table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Imię i nazwisko</th>
+            <th>Email</th>
+            <th>Telefon</th>
+            <th>WWW</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users" [ngClass]="getCssClass(user)">
+            <td>{{user.id }}</td>
+            <td>{{user.fullName | alternativeCasing }}</td>
+            <td>{{user.email | uppercase}}</td>
+            <td>{{user.phone }}</td>
+            <td>{{user.website}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ng-container *ngIf="!isTableOptionVisible">
+    <div *ngFor="let user of users">
+        <h5>{{user.fullName}}</h5>
+        <p>{{user.email}}</p>
+    </div>
+</ng-container>

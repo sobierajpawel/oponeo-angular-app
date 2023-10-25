@@ -1,0 +1,8 @@
+.nav-background{
+    background-color: gray !important;
+}
+
+.selected-nav{
+    color: white;
+    font-weight: 500;
+}
