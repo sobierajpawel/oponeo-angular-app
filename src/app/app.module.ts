@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AlternativeCasingPipe } from './alternative-casing.pipe';
 import { HighlightSearchedPipe } from './highlight-searched.pipe';
 import { FormsModule } from '@angular/forms';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FormsModule } from '@angular/forms';
     AddUserComponent,
     HomeComponent,
     AlternativeCasingPipe,
-    HighlightSearchedPipe
+    HighlightSearchedPipe,
+    EditUserComponent
   ],
   imports: [
     BrowserModule,

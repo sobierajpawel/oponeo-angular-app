@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
 import { HttpUsersService } from '../http-users.service';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-users-list',
@@ -14,7 +15,8 @@ export class UsersListComponent implements OnInit {
   isTableOptionVisible = true;
   removedUser = "";
 
-  constructor(private httpUserService: HttpUsersService) {
+  constructor(private httpUserService: HttpUsersService,
+    private router : Router) {
 
   }
 
@@ -58,5 +60,9 @@ export class UsersListComponent implements OnInit {
         this.users = this.users.filter(x=>x.id !== id);
         this.copyUsers = this.copyUsers.filter(x=>x.id !== id);
       });
+  }
+
+  editUser(id : number){
+    this.router.navigate(['edit-users/',id]);
   }
 }

@@ -17,8 +17,7 @@
     <input #input_text type="text" class="form-control" (keyup)="search(input_text.value)" />
 </div>
 
-<div *ngIf="removedUser" 
-    class="alert alert-danger">
+<div *ngIf="removedUser" class="alert alert-danger">
     Usunięto użytkownika {{ removedUser }}
 </div>
 
@@ -40,9 +39,15 @@
             <td [innerHTML]="user.email | highlightSearched : input_text.value">{{user.email | uppercase}}</td>
             <td>{{user.phone }}</td>
             <td>{{user.website}}</td>
-            <td><button (click)="deleteUser(user.id)" class="btn btn-danger">
+            <td>
+                <button [routerLink]="'/edit-users/'+ user.id" 
+                class="btn btn-warning">
+                    Edycja
+                </button>
+                <button (click)="deleteUser(user.id)" class="btn btn-danger">
                     Usuń
-                </button></td>
+                </button>
+            </td>
         </tr>
     </tbody>
 </table>
@@ -51,6 +56,9 @@
     <div *ngFor="let user of users">
         <h5>{{user.fullName}}</h5>
         <p>{{user.email}}</p>
+        <button (click)="editUser(user.id)" class="btn btn-warning">
+            Edytuj
+        </button>
         <button (click)="deleteUser(user.id)" class="btn btn-danger">
             Usuń
         </button>

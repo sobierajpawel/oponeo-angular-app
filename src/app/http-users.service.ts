@@ -1,13 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from './user';
-import { map } from 'rxjs';
+import { map, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpUsersService {
-  private url ="https://jsonplaceholder.typicode.com/users";
+  private url = "https://jsonplaceholder.typicode.com/users";
+  private localUsers: User[] = [];
+  private id = 11;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -15,11 +17,31 @@ export class HttpUsersService {
     return this.httpClient.get<any[]>(this.url)
       .pipe(map(data => data.map(item =>
         new User(item.id, item.name, item.email, item.phone,
-          item.website, item.id % 2 === 0))));
+          item.website, item.id % 2 === 0))))
+      .pipe(map(users =>{
+        return [...users,...this.localUsers];
+      }))
   }
 
-  deleteUser(id : number){
+  deleteUser(id: number) {
     let deleteUrl = `${this.url}/${id}`;
     return this.httpClient.delete(deleteUrl);
+  }
+
+  postUser(user: User) {
+    const mappedUser = {
+      "name": user.fullName,
+      "email": user.email,
+      "id": user.id,
+      "phone": user.phone,
+      "website": user.website
+    }
+
+    return this.httpClient.post<User>(this.url, mappedUser)
+      .pipe(tap(_ => {
+        user.id = this.id
+        this.localUsers.push(user);
+        this.id++;
+      }));
   }
 }
