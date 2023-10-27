@@ -1,1 +1,48 @@
-<p>add-user works!</p>
+<h4>Dodaj użytkownika</h4>
+
+<!-- <p>{{user.fullName}}</p> -->
+
+<form #form="ngForm" (ngSubmit)="submit(form)">
+    <div>
+        <label class="form-label">
+            Imię i nazwisko
+        </label>
+        <input #name_input="ngModel" required [(ngModel)]="user.fullName" name="fullName" class="form-control" type="text" />
+        <div *ngIf="name_input.invalid && name_input.touched"
+        class="text-error-info"
+        >Pole jest wymagane</div>
+    </div>
+
+    <div>
+        <label class="form-label">
+            Email
+        </label>
+        <input #email_input="ngModel" required email [(ngModel)]="user.email" name="email" class="form-control" type="email" />
+        <div *ngIf="email_input.invalid" class="text-error-info">
+            <p *ngIf="email_input.errors?.['required']">Pole jest wymagane</p>
+            <p *ngIf="email_input.errors?.['email']">Email musi zawierać znak @</p>
+        </div>
+    
+    </div>
+
+    <div>
+        <label class="form-label">
+            WWW
+        </label>
+        <select #website_input="ngModel" required class="form-control" [(ngModel)]="user.website" name="website">
+            <option [ngValue]="null">---Wybierz stronę---</option>
+            <option [value]="website" *ngFor="let website of websites">{{website}}</option>
+        </select>
+        <div class="text-error-info" *ngIf="website_input.invalid">Strona musi być wybrana</div>
+    </div>
+
+    <div style="margin-top:10px">
+        <button class="btn btn-outline-success">
+            Zapisz
+        </button>
+    </div>
+</form>
+
+<div class="text-error-info" *ngIf="isValidationFailed">
+    Jeden z wymogów nie został spełniony!
+</div>

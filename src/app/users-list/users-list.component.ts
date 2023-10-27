@@ -47,14 +47,14 @@ export class UsersListComponent implements OnInit {
 
   search(searchPhrase: string) {
     this.users = this.copyUsers
-      .filter(x => x.fullName.toLowerCase().includes(searchPhrase.toLowerCase()) ||
-        x.email.toLowerCase().includes(searchPhrase.toLowerCase()));
+      .filter(x => x.fullName!.toLowerCase().includes(searchPhrase.toLowerCase()) ||
+        x.email!.toLowerCase().includes(searchPhrase.toLowerCase()));
   }
 
   deleteUser(id: number) {
     this.httpUserService.deleteUser(id)
       .subscribe(() => {
-        this.removedUser = this.users.find(x=>x.id === id)!.fullName;
+        this.removedUser = this.users.find(x=>x.id === id)!.fullName!;
         this.users = this.users.filter(x=>x.id !== id);
         this.copyUsers = this.copyUsers.filter(x=>x.id !== id);
       });

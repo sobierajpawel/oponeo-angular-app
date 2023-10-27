@@ -36,7 +36,7 @@
     <tbody>
         <tr *ngFor="let user of users" [ngClass]="getCssClass(user)">
             <td>{{user.id }}</td>
-            <td [innerHTML]="user.fullName | alternativeCasing | highlightSearched : input_text.value"></td>
+            <td [innerHTML]="user.fullName! | alternativeCasing | highlightSearched : input_text.value"></td>
             <td [innerHTML]="user.email | highlightSearched : input_text.value">{{user.email | uppercase}}</td>
             <td>{{user.phone }}</td>
             <td>{{user.website}}</td>
