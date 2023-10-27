@@ -23,6 +23,15 @@ export class HttpUsersService {
       }))
   }
 
+  getUser(id : number){
+    let getUserUrl = `${this.url}/${id}`;
+
+    return this.httpClient.get<any>(getUserUrl)
+    .pipe(map(item =>
+      new User(item.id, item.name, item.email, item.phone,
+        item.website, item.id % 2 === 0)));
+  }
+
   deleteUser(id: number) {
     let deleteUrl = `${this.url}/${id}`;
     return this.httpClient.delete(deleteUrl);
@@ -43,5 +52,18 @@ export class HttpUsersService {
         this.localUsers.push(user);
         this.id++;
       }));
+  }
+
+  putUser(user : User){
+    const mappedUser = {
+      "name": user.fullName,
+      "email": user.email,
+      "id": user.id,
+      "phone": user.phone,
+      "website": user.website
+    }
+
+    let updateUrl = `${this.url}/${user.id}`;
+    return this.httpClient.put<User>(updateUrl, mappedUser);
   }
 }
