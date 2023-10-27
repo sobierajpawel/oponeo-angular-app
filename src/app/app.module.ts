@@ -9,6 +9,7 @@ import { AddUserComponent } from './add-user/add-user.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AlternativeCasingPipe } from './alternative-casing.pipe';
+import { HighlightSearchedPipe } from './highlight-searched.pipe';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { AlternativeCasingPipe } from './alternative-casing.pipe';
     UsersListComponent,
     AddUserComponent,
     HomeComponent,
-    AlternativeCasingPipe
+    AlternativeCasingPipe,
+    HighlightSearchedPipe
   ],
   imports: [
     BrowserModule,

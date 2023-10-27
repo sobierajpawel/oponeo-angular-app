@@ -7,14 +7,19 @@ import { map } from 'rxjs';
   providedIn: 'root'
 })
 export class HttpUsersService {
+  private url ="https://jsonplaceholder.typicode.com/users";
 
   constructor(private httpClient: HttpClient) { }
 
   getUsers() {
-    let url = "https://jsonplaceholder.typicode.com/users";
-    return this.httpClient.get<any[]>(url)
+    return this.httpClient.get<any[]>(this.url)
       .pipe(map(data => data.map(item =>
         new User(item.id, item.name, item.email, item.phone,
           item.website, item.id % 2 === 0))));
+  }
+
+  deleteUser(id : number){
+    let deleteUrl = `${this.url}/${id}`;
+    return this.httpClient.delete(deleteUrl);
   }
 }

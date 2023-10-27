@@ -12,6 +12,16 @@
     </div>
 </div>
 
+<div class="col-6" style="margin-top:10px">
+    <h6>Wyszukaj po frazie:</h6>
+    <input #input_text type="text" class="form-control" (keyup)="search(input_text.value)" />
+</div>
+
+<div *ngIf="removedUser" 
+    class="alert alert-danger">
+    Usunięto użytkownika {{ removedUser }}
+</div>
+
 <table *ngIf="isTableOptionVisible" class="table table-hover table-striped">
     <thead>
         <tr>
@@ -20,15 +30,19 @@
             <th>Email</th>
             <th>Telefon</th>
             <th>WWW</th>
+            <th>Akcje</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let user of users" [ngClass]="getCssClass(user)">
             <td>{{user.id }}</td>
-            <td>{{user.fullName | alternativeCasing }}</td>
-            <td>{{user.email | uppercase}}</td>
+            <td [innerHTML]="user.fullName | alternativeCasing | highlightSearched : input_text.value"></td>
+            <td [innerHTML]="user.email | highlightSearched : input_text.value">{{user.email | uppercase}}</td>
             <td>{{user.phone }}</td>
             <td>{{user.website}}</td>
+            <td><button (click)="deleteUser(user.id)" class="btn btn-danger">
+                    Usuń
+                </button></td>
         </tr>
     </tbody>
 </table>
@@ -37,5 +51,8 @@
     <div *ngFor="let user of users">
         <h5>{{user.fullName}}</h5>
         <p>{{user.email}}</p>
+        <button (click)="deleteUser(user.id)" class="btn btn-danger">
+            Usuń
+        </button>
     </div>
 </ng-container>
