@@ -12,7 +12,11 @@ export class HttpTodoItemsService {
 
   getTodoItems(userId : number) : Observable<TodoItem[]>{
     let url = `https://jsonplaceholder.typicode.com/users/${userId}/todos`;   
-
     return this.httpClient.get<TodoItem[]>(url);
+  }
+
+  postTodoItem(todoItem : TodoItem){
+    let url = "https://jsonplaceholder.typicode.com/todos";
+    return this.httpClient.post<TodoItem>(url,todoItem);
   }
 }

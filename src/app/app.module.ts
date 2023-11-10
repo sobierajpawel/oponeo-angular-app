@@ -10,13 +10,14 @@ import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AlternativeCasingPipe } from './alternative-casing.pipe';
 import { HighlightSearchedPipe } from './highlight-searched.pipe';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { UserDetailsParentComponent } from './user-details/user-details-parent/user-details-parent.component';
 import { InformationUserChildComponent } from './user-details/information-user-child/information-user-child.component';
 import { TodoItemsChildComponent } from './user-details/todo-items-child/todo-items-child.component';
 import { ButtonsChildComponent } from './user-details/buttons-child/buttons-child.component';
 import { FormUserComponent } from './form-user/form-user.component';
+import { AddTodoItemComponent } from './add-todo-item/add-todo-item.component';
 
 @NgModule({
   declarations: [
@@ -32,13 +33,15 @@ import { FormUserComponent } from './form-user/form-user.component';
     InformationUserChildComponent,
     TodoItemsChildComponent,
     ButtonsChildComponent,
-    FormUserComponent
+    FormUserComponent,
+    AddTodoItemComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
