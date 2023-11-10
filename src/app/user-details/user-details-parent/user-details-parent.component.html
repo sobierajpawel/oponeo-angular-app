@@ -1,0 +1,7 @@
+<h1>Szczegóły i lista zadań {{user.fullName}}</h1>
+
+<app-information-user-child [fullName]="user.fullName" [email]="user.email"></app-information-user-child>
+
+<app-todo-items-child></app-todo-items-child>
+
+<app-buttons-child (editBtnEmitter)="goToEdit()"></app-buttons-child>

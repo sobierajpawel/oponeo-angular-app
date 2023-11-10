@@ -44,6 +44,9 @@
                 class="btn btn-warning">
                     Edycja
                 </button>
+                <button class="btn btn-secondary" [routerLink]="'/detail-user/'+user.id">
+                    Szczegóły 
+                </button>
                 <button (click)="deleteUser(user.id)" class="btn btn-danger">
                     Usuń
                 </button>
@@ -59,6 +62,10 @@
         <button (click)="editUser(user.id)" class="btn btn-warning">
             Edytuj
         </button>
+        <button class="btn btn-secondary" [routerLink]="'/detail-user/'+user.id">
+            Szczegóły 
+        </button>
+
         <button (click)="deleteUser(user.id)" class="btn btn-danger">
             Usuń
         </button>

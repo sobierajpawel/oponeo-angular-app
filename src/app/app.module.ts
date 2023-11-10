@@ -12,6 +12,10 @@ import { AlternativeCasingPipe } from './alternative-casing.pipe';
 import { HighlightSearchedPipe } from './highlight-searched.pipe';
 import { FormsModule } from '@angular/forms';
 import { EditUserComponent } from './edit-user/edit-user.component';
+import { UserDetailsParentComponent } from './user-details/user-details-parent/user-details-parent.component';
+import { InformationUserChildComponent } from './user-details/information-user-child/information-user-child.component';
+import { TodoItemsChildComponent } from './user-details/todo-items-child/todo-items-child.component';
+import { ButtonsChildComponent } from './user-details/buttons-child/buttons-child.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,11 @@ import { EditUserComponent } from './edit-user/edit-user.component';
     HomeComponent,
     AlternativeCasingPipe,
     HighlightSearchedPipe,
-    EditUserComponent
+    EditUserComponent,
+    UserDetailsParentComponent,
+    InformationUserChildComponent,
+    TodoItemsChildComponent,
+    ButtonsChildComponent
   ],
   imports: [
     BrowserModule,
