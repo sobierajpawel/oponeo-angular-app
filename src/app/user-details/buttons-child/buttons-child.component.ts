@@ -7,15 +7,19 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class ButtonsChildComponent {
   @Output()
-  editBtnEmitter = new EventEmitter();
+  editBtnEmitter = new EventEmitter<string>();
   @Output()
   backBtnEmitter = new EventEmitter();
 
   editBtnClick(){
-    this.editBtnEmitter.emit();
+    this.editBtnEmitter.emit("testowy-string");
   }
 
   backBtnClick(){
     this.backBtnEmitter.emit();
+  }
+
+  alertMethod(){
+    alert('test');
   }
 }

@@ -13,4 +13,4 @@
     </div>
 </div>
 
-<app-buttons-child (editBtnEmitter)="goToEdit()" (backBtnEmitter)="goBack()"></app-buttons-child>
+<app-buttons-child #formRef (editBtnEmitter)="goToEdit($event)" (backBtnEmitter)="goBack()"></app-buttons-child>

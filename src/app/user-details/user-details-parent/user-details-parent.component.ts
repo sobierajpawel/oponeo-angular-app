@@ -1,10 +1,11 @@
 import { Location } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpTodoItemsService } from 'src/app/http-todo-items.service';
 import { HttpUsersService } from 'src/app/http-users.service';
 import { TodoItem } from 'src/app/todo-item';
 import { User } from 'src/app/user';
+import { ButtonsChildComponent } from '../buttons-child/buttons-child.component';
 
 @Component({
   selector: 'app-user-details-parent',
@@ -14,6 +15,8 @@ import { User } from 'src/app/user';
 export class UserDetailsParentComponent {
   user: User = new User(1, "", "", "", "", false);
   todoItems: TodoItem[] = [];
+  @ViewChild('formRef')
+  buttonsComponent! : ButtonsChildComponent;
 
   constructor(private userHttpService: HttpUsersService, private activatedRoute: ActivatedRoute,
     private router: Router, private todoItemsHttpService: HttpTodoItemsService, private location : Location) {
@@ -43,11 +46,13 @@ export class UserDetailsParentComponent {
       });
   }
 
-  goToEdit() {
-    this.router.navigate(["/edit-users/", this.user.id]);
+  goToEdit(event : string) {
+    alert(event);
+    //this.router.navigate(["/edit-users/", this.user.id]);
   }
 
   goBack(){
-    this.location.back();
+    //this.location.back();
+    this.buttonsComponent.alertMethod();
   }
 }
