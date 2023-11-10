@@ -1,1 +1,8 @@
-<p>todo-items-child works!</p>
+<h4>Lista zadań do realizacji</h4>
+<ul class="list-group" style="height: 200px;overflow-y: scroll;">
+    <li class="list-group-item todo-item"
+        [ngClass]="{'list-group-item-success': item.completed, 'list-group-item-danger': !item.completed}"
+        *ngFor="let item of items">
+        {{item.title}}
+    </li>
+</ul>

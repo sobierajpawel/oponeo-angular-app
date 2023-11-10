@@ -1,6 +1,8 @@
 <h4>Szczegóły użytkownika</h4>
-<p *ngIf="id !== 0">{{id}}</p>
-<p>{{fullName}}</p>
-<p>{{email}}</p>
-<p>{{phone}}</p>
-<p>{{website}}</p>
+<ng-container *ngIf="id !== 0">
+    <p><strong>Id: </strong>{{id}}</p>
+    <p><strong>Imię i nazwisko: </strong>{{fullName}}</p>
+    <p><strong>Email: </strong>{{email}}</p>
+    <p><strong>Telefon: </strong>{{phone}}</p>
+    <p><strong>WWW: </strong>{{website}}</p>
+</ng-container>

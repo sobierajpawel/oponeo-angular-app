@@ -1,7 +1,16 @@
 <h1>Szczegóły i lista zadań {{user.fullName}}</h1>
 
-<app-information-user-child [fullName]="user.fullName" [email]="user.email"></app-information-user-child>
+<div class="row">
+    <div class="col-6">
+        <app-information-user-child [fullName]="user.fullName" 
+        [email]="user.email"
+        [id]="user.id"
+        [phone]="user.phone"
+        [website]="user.website"></app-information-user-child>
+    </div>
+    <div class="col-6">
+        <app-todo-items-child [items]="todoItems"></app-todo-items-child>
+    </div>
+</div>
 
-<app-todo-items-child></app-todo-items-child>
-
-<app-buttons-child (editBtnEmitter)="goToEdit()"></app-buttons-child>
+<app-buttons-child (editBtnEmitter)="goToEdit()" (backBtnEmitter)="goBack()"></app-buttons-child>

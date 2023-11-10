@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { TodoItem } from 'src/app/todo-item';
 
 @Component({
   selector: 'app-todo-items-child',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./todo-items-child.component.css']
 })
 export class TodoItemsChildComponent {
-
+  @Input()
+  items : TodoItem[] = [];
 }

@@ -8,8 +8,14 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class ButtonsChildComponent {
   @Output()
   editBtnEmitter = new EventEmitter();
+  @Output()
+  backBtnEmitter = new EventEmitter();
 
   editBtnClick(){
     this.editBtnEmitter.emit();
+  }
+
+  backBtnClick(){
+    this.backBtnEmitter.emit();
   }
 }

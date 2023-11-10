@@ -1,6 +1,9 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HttpTodoItemsService } from 'src/app/http-todo-items.service';
 import { HttpUsersService } from 'src/app/http-users.service';
+import { TodoItem } from 'src/app/todo-item';
 import { User } from 'src/app/user';
 
 @Component({
@@ -9,10 +12,11 @@ import { User } from 'src/app/user';
   styleUrls: ['./user-details-parent.component.css']
 })
 export class UserDetailsParentComponent {
-  user : User = new User(1,"","","","",false);
+  user: User = new User(1, "", "", "", "", false);
+  todoItems: TodoItem[] = [];
 
-  constructor(private userHttpService : HttpUsersService, private activatedRoute : ActivatedRoute,
-    private router : Router){
+  constructor(private userHttpService: HttpUsersService, private activatedRoute: ActivatedRoute,
+    private router: Router, private todoItemsHttpService: HttpTodoItemsService, private location : Location) {
 
   }
 
@@ -20,15 +24,30 @@ export class UserDetailsParentComponent {
     this.activatedRoute.params.subscribe(param => {
       let id = param["id"];
 
-      this.userHttpService.getUser(id)
-        .subscribe(data => {
-          this.user = data;
-        })
+      this.getUserData(id);
+      this.getTodoItems(id);
     })
-
   }
 
-  goToEdit(){
-    this.router.navigate(["/edit-users/",this.user.id]);
+  getUserData(id: number) {
+    this.userHttpService.getUser(id)
+      .subscribe(data => {
+        this.user = data;
+      });
+  }
+
+  getTodoItems(id: number) {
+    this.todoItemsHttpService.getTodoItems(id)
+      .subscribe(data => {
+        this.todoItems = data;
+      });
+  }
+
+  goToEdit() {
+    this.router.navigate(["/edit-users/", this.user.id]);
+  }
+
+  goBack(){
+    this.location.back();
   }
 }
