@@ -16,6 +16,7 @@ import { UserDetailsParentComponent } from './user-details/user-details-parent/u
 import { InformationUserChildComponent } from './user-details/information-user-child/information-user-child.component';
 import { TodoItemsChildComponent } from './user-details/todo-items-child/todo-items-child.component';
 import { ButtonsChildComponent } from './user-details/buttons-child/buttons-child.component';
+import { FormUserComponent } from './form-user/form-user.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ButtonsChildComponent } from './user-details/buttons-child/buttons-chil
     UserDetailsParentComponent,
     InformationUserChildComponent,
     TodoItemsChildComponent,
-    ButtonsChildComponent
+    ButtonsChildComponent,
+    FormUserComponent
   ],
   imports: [
     BrowserModule,

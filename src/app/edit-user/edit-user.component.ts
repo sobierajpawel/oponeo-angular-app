@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpUsersService } from '../http-users.service';
 import { User } from '../user';
 import { delay } from 'rxjs';
 import { NgForm } from '@angular/forms';
+import { FormUserComponent } from '../form-user/form-user.component';
 
 @Component({
   selector: 'app-edit-user',
@@ -11,16 +12,10 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./edit-user.component.css']
 })
 export class EditUserComponent implements OnInit {
-  user: User = new User(1, "", "", "", "", false);
-  websites: string[] = [
-    "hildegard.org",
-    "anastasia.net",
-    "ramiro.info"
-  ];
-  isValidationFailed = false;
-  isSuccessfulResponse = false;
-  isErrorResponse = false;
-  isSubmitting = false;
+  @ViewChild('formUserRef')
+  formComponent! : FormUserComponent;
+  
+  editedUser: User = new User(1, "", "", "", "", false);
 
   constructor(private activatedRoute: ActivatedRoute, private httpUserService: HttpUsersService) {
 
@@ -32,47 +27,20 @@ export class EditUserComponent implements OnInit {
 
       this.httpUserService.getUser(id)
         .subscribe(data => {
-          this.user = data;
+          this.editedUser = data;
         })
     })
-
   }
 
-  private resetFormStatusFlags() {
-    this.isValidationFailed = false;
-    this.isErrorResponse = false;
-    this.isSuccessfulResponse = false;
-    this.isSubmitting = false;
-  }
-
-  setDefaultValues(){
-    this.user = new User(1,"Jan Kowalski","s@o","22233313","anastasia.net", true);
-  }
-
-  submit(form: NgForm) {
-    this.resetFormStatusFlags();
-
-    if (form.invalid) {
-      this.isValidationFailed = true;
-      return;
-    }
-
-    //Logike wysyłania żądania PUT
-
-    console.log(this.user);
-
-    this.isSubmitting = true;
-
-    this.httpUserService.putUser(this.user)
+  editUser(user : User) {
+    this.httpUserService.putUser(user)
       .pipe(delay(2000))
       .subscribe({
         next: _ => {
-          this.isSuccessfulResponse = true;
-          this.isSubmitting = false;
+          this.formComponent.setSuccessfulState();
         },
         error: _ => {
-          this.isErrorResponse = true;
-          this.isSubmitting = false;
+          this.formComponent.setErrorState();
         }
       })
   }

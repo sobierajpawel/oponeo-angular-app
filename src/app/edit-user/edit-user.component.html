@@ -1,75 +1,8 @@
 <h4>Edytuj użytkownika</h4>
 
-<p>{{user.fullName}}</p>
+<p>{{editedUser.fullName}}</p>
 
-<form #form="ngForm" (ngSubmit)="submit(form)">
-    <div>
-        <label class="form-label">
-            Imię i nazwisko
-        </label>
-        <input #name_input="ngModel" required [(ngModel)]="user.fullName" name="fullName" class="form-control" type="text" />
-        <div *ngIf="name_input.invalid && name_input.touched"
-        class="text-error-info"
-        >Pole jest wymagane</div>
-    </div>
-
-    <div>
-        <label class="form-label">
-            Email
-        </label>
-        <input #email_input="ngModel" required email [(ngModel)]="user.email" name="email" class="form-control" type="email" />
-        <div *ngIf="email_input.invalid" class="text-error-info">
-            <p *ngIf="email_input.errors?.['required']">Pole jest wymagane</p>
-            <p *ngIf="email_input.errors?.['email']">Email musi zawierać znak @</p>
-        </div>  
-    </div>
-
-    <div>
-        <label class="form-label">Numer telefonu</label>
-        <input #phone_input="ngModel"
-            class="form-control" 
-            type="text" [(ngModel)]="user.phone" name="phone" required pattern="\d{7,15}" />
-        <div *ngIf="phone_input.invalid" class="text-error-info">
-            <p *ngIf="phone_input.errors?.['required']">Pole jest wymagane</p>
-            <p *ngIf="phone_input.errors?.['pattern']">Wartość nie jest numerem telefonu</p>
-        </div>
-    </div>
-
-    <div>
-        <label class="form-label">
-            WWW
-        </label>
-        <select #website_input="ngModel" required class="form-control" [(ngModel)]="user.website" name="website">
-            <option [ngValue]="null">---Wybierz stronę---</option>
-            <option [value]="website" *ngFor="let website of websites">{{website}}</option>
-        </select>
-        <div class="text-error-info" *ngIf="website_input.invalid">Strona musi być wybrana</div>
-    </div>
-
-    <div class="col-auto">
-        <label class="form-label">Czy użytkownik aktywny?</label>
-        <input style="margin-left:10px" type="checkbox" [(ngModel)]="user.isActive" name="isActive"/>
-        
-    </div>
-
-    <div style="margin-top:10px">
-        <button [disabled]="isSubmitting" class="btn btn-outline-success">
-            <span *ngIf="isSubmitting" class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
-            Zapisz
-        </button>
-        <button style="margin-left:10px" type="button" class="btn btn-outline-secondary" (click)="setDefaultValues()">
-            Wprowadź przykładowe dane
-        </button>
-        <button style="margin-left:10px" type="reset" class="btn btn-outline-primary">
-            Reset
-        </button>
-    </div>
-</form>
-
-<div *ngIf="isSuccessfulResponse" style="margin-top:10px" class="alert alert-success">
-    Dodano użytkownika!
-</div>
-
-<div *ngIf="isErrorResponse" style="margin-top:10px" class="alert alert-danger">
-    Wystąpił błąd w dodawaniu!
-</div>
+<app-form-user #formUserRef [user]="editedUser" [formSuccessText]="'Edytowano użytkownika'"
+    (submitEvent)="editUser($event)"
+    [isEditForm]="true"
+    ></app-form-user>
