@@ -21,16 +21,28 @@ export class AddTodoItemComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private httpUserService: HttpUsersService,
     private todoItemHttpService : HttpTodoItemsService) {
     this.todoItemForm = this.formBuilder.group({
-      title: new FormControl('Domyślny tytuł', [Validators.required,
-      Validators.minLength(this.minLengthTitle),
-      Validators.maxLength(this.maxLengthTitle)]),
-      completed: [false],
+      title: new FormControl('', [Validators.required,
+        Validators.minLength(this.minLengthTitle),
+        Validators.maxLength(this.maxLengthTitle)]),
+      completed: [true],
       userId: new FormControl('', [Validators.required])
     });
   }
 
   ngOnInit(): void {
     this.getUsers();
+  }
+
+  setValues(){
+    // this.todoItemForm.patchValue({
+    //   title : "Tytuł testowy"
+    // });
+    this.todoItemForm.controls["title"].disable();
+    this.todoItemForm.setValue({
+      title : "Tytuł testowy",
+      completed : true,
+      userId : 4
+    })
   }
 
   get f() {

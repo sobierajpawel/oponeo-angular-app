@@ -15,7 +15,7 @@
         <label class="form-label">
             Czy zakończone?
         </label>
-        <input formControlName="completed" style="margin-left:10px;margin-top:10px;width:20px;height:20px" type="checkbox"/>
+        <input  formControlName="completed" style="margin-left:10px;margin-top:10px;width:20px;height:20px" type="checkbox"/>
     </div>
     <div>
         <label class="form-label">
@@ -32,6 +32,7 @@
     </div>
     <div style="margin-top:10px">
         <button class="btn btn-outline-success">Zapisz</button>
+        <button type="button" (click)="setValues()" class="btn btn-outline-primary">Wypełnij przykładowymi danymi</button>
     </div>
 </form>
 
