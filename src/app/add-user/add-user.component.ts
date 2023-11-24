@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { HttpUsersService } from '../http-users.service';
 import { delay } from 'rxjs';
 import { FormUserComponent } from '../form-user/form-user.component';
+import { ToastSharedService } from '../toast-shared.service';
 
 @Component({
   selector: 'app-add-user',
@@ -14,7 +15,7 @@ export class AddUserComponent {
   @ViewChild('formUserRef')
   formComponent! : FormUserComponent;
 
-  constructor(private httpUserService : HttpUsersService){ 
+  constructor(private httpUserService : HttpUsersService, private toastSharedService : ToastSharedService){ 
   }
 
   addUser(user : User){
@@ -23,9 +24,11 @@ export class AddUserComponent {
     .subscribe({
       next : _ =>{
         this.formComponent.setSuccessfulState();
+        this.toastSharedService.send("Dodano użytkownika");
       },
       error : _ =>{
         this.formComponent.setErrorState();
+        this.toastSharedService.send("Wystąpił błąd");
       }
     })
   }

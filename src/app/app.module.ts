@@ -19,6 +19,7 @@ import { ButtonsChildComponent } from './user-details/buttons-child/buttons-chil
 import { FormUserComponent } from './form-user/form-user.component';
 import { AddTodoItemComponent } from './add-todo-item/add-todo-item.component';
 import { EditTodoItemComponent } from './edit-todo-item/edit-todo-item.component';
+import { ToastComponent } from './toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { EditTodoItemComponent } from './edit-todo-item/edit-todo-item.component
     ButtonsChildComponent,
     FormUserComponent,
     AddTodoItemComponent,
-    EditTodoItemComponent
+    EditTodoItemComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,

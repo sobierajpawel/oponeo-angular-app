@@ -8,6 +8,7 @@ import { forbiddenWordsValidator } from '../validators/forbiddenWordsValidator';
 import { titleCheckingValidator } from '../validators/titleCheckingValidator';
 import { firstLetterUpperCaseValidator } from '../validators/firstLetterUpperCaseValidator';
 import { activeUserValidator } from '../validators/activeUserValidator';
+import { ToastSharedService } from '../toast-shared.service';
 
 @Component({
   selector: 'app-add-todo-item',
@@ -23,7 +24,9 @@ export class AddTodoItemComponent implements OnInit {
   isSuccessfulResponse = false;
 
   constructor(private formBuilder: FormBuilder, private httpUserService: HttpUsersService,
-    private todoItemHttpService: HttpTodoItemsService) {
+    private todoItemHttpService: HttpTodoItemsService, 
+    private toastSharedService : ToastSharedService) {
+
     this.todoItemForm = this.formBuilder.group({
       title: new FormControl('', [Validators.required,
       forbiddenWordsValidator(['test', 'example']),
@@ -81,6 +84,7 @@ export class AddTodoItemComponent implements OnInit {
     this.todoItemHttpService.postTodoItem(todoItem)
       .subscribe(_ => {
         this.isSuccessfulResponse = true;
+        this.toastSharedService.send("Dodano zadanie!");
       });
   }
 }
