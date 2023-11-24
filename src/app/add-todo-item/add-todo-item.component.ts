@@ -6,6 +6,8 @@ import { TodoItem } from '../todo-item';
 import { HttpTodoItemsService } from '../http-todo-items.service';
 import { forbiddenWordsValidator } from '../validators/forbiddenWordsValidator';
 import { titleCheckingValidator } from '../validators/titleCheckingValidator';
+import { firstLetterUpperCaseValidator } from '../validators/firstLetterUpperCaseValidator';
+import { activeUserValidator } from '../validators/activeUserValidator';
 
 @Component({
   selector: 'app-add-todo-item',
@@ -24,12 +26,13 @@ export class AddTodoItemComponent implements OnInit {
     private todoItemHttpService: HttpTodoItemsService) {
     this.todoItemForm = this.formBuilder.group({
       title: new FormControl('', [Validators.required,
-      forbiddenWordsValidator(['test', 'example'])
+      forbiddenWordsValidator(['test', 'example']),
+      firstLetterUpperCaseValidator()
         // Validators.minLength(this.minLengthTitle),
         // Validators.maxLength(this.maxLengthTitle)
       ], [titleCheckingValidator(this.todoItemHttpService)]),
       completed: [true],
-      userId: new FormControl('', [Validators.required]),
+      userId: new FormControl('', [Validators.required], [activeUserValidator(this.httpUserService)]),
 
     },
       { updateOn: "blur" }

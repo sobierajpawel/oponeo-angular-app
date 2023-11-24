@@ -10,6 +10,9 @@
             <p *ngIf="f['title'].errors['forbiddenWord']">
                 {{f['title'].errors['forbiddenWord'].text}}
             </p>
+            <p *ngIf="f['title'].errors['notUpperCaseTitle']">
+                {{f['title'].errors['notUpperCaseTitle'].text}}
+            </p>
             <p *ngIf="f['title'].errors['titleExists']">
                 {{f['title'].errors['titleExists'].text}}
             </p>
@@ -35,6 +38,9 @@
         </select>
         <div class="text-error-info" *ngIf="f['userId'].errors">
             <p *ngIf="f['userId'].errors['required']">Użytkownik musi być wybrany</p>
+            <p *ngIf="f['userId'].errors['notActiveUser']">
+                {{f['userId'].errors['notActiveUser'].text}}
+            </p>
         </div>
     </div>
     <div style="margin-top:10px">
