@@ -4,6 +4,8 @@ import { HttpUsersService } from '../http-users.service';
 import { User } from '../user';
 import { TodoItem } from '../todo-item';
 import { HttpTodoItemsService } from '../http-todo-items.service';
+import { forbiddenWordsValidator } from '../validators/forbiddenWordsValidator';
+import { titleCheckingValidator } from '../validators/titleCheckingValidator';
 
 @Component({
   selector: 'app-add-todo-item',
@@ -19,29 +21,34 @@ export class AddTodoItemComponent implements OnInit {
   isSuccessfulResponse = false;
 
   constructor(private formBuilder: FormBuilder, private httpUserService: HttpUsersService,
-    private todoItemHttpService : HttpTodoItemsService) {
+    private todoItemHttpService: HttpTodoItemsService) {
     this.todoItemForm = this.formBuilder.group({
       title: new FormControl('', [Validators.required,
-        Validators.minLength(this.minLengthTitle),
-        Validators.maxLength(this.maxLengthTitle)]),
+      forbiddenWordsValidator(['test', 'example'])
+        // Validators.minLength(this.minLengthTitle),
+        // Validators.maxLength(this.maxLengthTitle)
+      ], [titleCheckingValidator(this.todoItemHttpService)]),
       completed: [true],
-      userId: new FormControl('', [Validators.required])
-    });
+      userId: new FormControl('', [Validators.required]),
+
+    },
+      { updateOn: "blur" }
+    );
   }
 
   ngOnInit(): void {
     this.getUsers();
   }
 
-  setValues(){
+  setValues() {
     // this.todoItemForm.patchValue({
     //   title : "Tytuł testowy"
     // });
     this.todoItemForm.controls["title"].disable();
     this.todoItemForm.setValue({
-      title : "Tytuł testowy",
-      completed : true,
-      userId : 4
+      title: "Tytuł testowy",
+      completed: true,
+      userId: 4
     })
   }
 
@@ -69,7 +76,7 @@ export class AddTodoItemComponent implements OnInit {
       this.f['completed'].value);
 
     this.todoItemHttpService.postTodoItem(todoItem)
-      .subscribe(_=>{
+      .subscribe(_ => {
         this.isSuccessfulResponse = true;
       });
   }

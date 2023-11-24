@@ -20,6 +20,11 @@ export class HttpTodoItemsService {
     return this.httpClient.get<TodoItem>(url);
   }
 
+  getTodoItemByTitle(title : string){
+    let url = `https://jsonplaceholder.typicode.com/todos?title=${title}`;
+    return this.httpClient.get<TodoItem[]>(url); 
+  }
+
   postTodoItem(todoItem : TodoItem){
     let url = "https://jsonplaceholder.typicode.com/todos";
     return this.httpClient.post<TodoItem>(url,todoItem);
