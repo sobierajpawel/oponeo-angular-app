@@ -5,6 +5,8 @@ import { HttpUsersService } from '../http-users.service';
 import { delay } from 'rxjs';
 import { FormUserComponent } from '../form-user/form-user.component';
 import { ToastSharedService } from '../toast-shared.service';
+import { Toast } from '../toast';
+import { Guid } from 'guid-typescript';
 
 @Component({
   selector: 'app-add-user',
@@ -13,23 +15,29 @@ import { ToastSharedService } from '../toast-shared.service';
 })
 export class AddUserComponent {
   @ViewChild('formUserRef')
-  formComponent! : FormUserComponent;
+  formComponent!: FormUserComponent;
 
-  constructor(private httpUserService : HttpUsersService, private toastSharedService : ToastSharedService){ 
+  constructor(private httpUserService: HttpUsersService, private toastSharedService: ToastSharedService) {
   }
 
-  addUser(user : User){
+  addUser(user: User) {
     this.httpUserService.postUser(user)
-    .pipe(delay(2000))
-    .subscribe({
-      next : _ =>{
-        this.formComponent.setSuccessfulState();
-        this.toastSharedService.send("Dodano użytkownika");
-      },
-      error : _ =>{
-        this.formComponent.setErrorState();
-        this.toastSharedService.send("Wystąpił błąd");
-      }
-    })
+      .pipe(delay(2000))
+      .subscribe({
+        next: _ => {
+          this.formComponent.setSuccessfulState();
+          this.toastSharedService.send(new Toast("Dodano użytkownika",
+            Guid.create(),
+            false
+          ));
+        },
+        error: _ => {
+          this.formComponent.setErrorState();
+          this.toastSharedService.send(new Toast("Wystąpił błąd ",
+            Guid.create(),
+            true
+          ));
+        }
+      })
   }
 }

@@ -9,6 +9,8 @@ import { titleCheckingValidator } from '../validators/titleCheckingValidator';
 import { firstLetterUpperCaseValidator } from '../validators/firstLetterUpperCaseValidator';
 import { activeUserValidator } from '../validators/activeUserValidator';
 import { ToastSharedService } from '../toast-shared.service';
+import { Toast } from '../toast';
+import { Guid } from 'guid-typescript';
 
 @Component({
   selector: 'app-add-todo-item',
@@ -24,8 +26,8 @@ export class AddTodoItemComponent implements OnInit {
   isSuccessfulResponse = false;
 
   constructor(private formBuilder: FormBuilder, private httpUserService: HttpUsersService,
-    private todoItemHttpService: HttpTodoItemsService, 
-    private toastSharedService : ToastSharedService) {
+    private todoItemHttpService: HttpTodoItemsService,
+    private toastSharedService: ToastSharedService) {
 
     this.todoItemForm = this.formBuilder.group({
       title: new FormControl('', [Validators.required,
@@ -84,7 +86,10 @@ export class AddTodoItemComponent implements OnInit {
     this.todoItemHttpService.postTodoItem(todoItem)
       .subscribe(_ => {
         this.isSuccessfulResponse = true;
-        this.toastSharedService.send("Dodano zadanie!");
+        this.toastSharedService.send(new Toast("Dodano zadanie",
+          Guid.create(),
+          false
+        ));
       });
   }
 }

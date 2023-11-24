@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastSharedService } from './toast-shared.service';
+import { Toast } from './toast';
 
 @Component({
   selector: 'app-root',
@@ -9,18 +10,18 @@ import { ToastSharedService } from './toast-shared.service';
 export class AppComponent implements OnInit{
   new_title = "Oponeo Angular Application"
   isBtnDisabled = false;
-  messageToasts : string[] = [];
+  messageToasts : Toast[] = [];
 
   constructor(private toastSharedService : ToastSharedService){
 
   }
 
   ngOnInit(): void {
-    this.toastSharedService.get().subscribe(message=>{
-      console.log("AppComponent otrzymał wiadomość "+ message);
-      this.messageToasts.push(message);
+    this.toastSharedService.get().subscribe(toast=>{
+      
+      this.messageToasts.push(toast);
       setTimeout(()=>{
-        this.messageToasts = this.messageToasts.filter(x=>x != message);
+        this.messageToasts = this.messageToasts.filter(x=>x.guid != toast.guid);
       }, 10000);
     })
   }

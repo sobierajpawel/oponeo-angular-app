@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Toast } from '../toast';
 
 @Component({
   selector: 'app-toast',
@@ -7,5 +8,5 @@ import { Component, Input } from '@angular/core';
 })
 export class ToastComponent {
   @Input()
-  messageContent : string = "";
+  toast! : Toast ;
 }
