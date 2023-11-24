@@ -1,0 +1,45 @@
+<h4>Edytuj zadanie</h4>
+
+<form [formGroup]="editTodoForm" (ngSubmit)="submit()">
+    <div>
+        <label class="form-label">Tytuł</label>
+        <input formControlName="title" class="form-control" type="text" />
+        <div class="text-error-info" *ngIf="editTodoForm.controls['title'].errors">
+            <div *ngIf="editTodoForm.controls['title'].errors['required']">
+                Tytuł jest wymagany
+            </div>
+            <div *ngIf="editTodoForm.controls['title'].errors['minlength']">
+                Minimalna ilośc znaków wynosi {{minLengthValue}}
+            </div>
+        </div>
+
+    </div>
+    <div>
+        <label class="form-label">
+            Czy zakończone?
+        </label>
+        <input formControlName="completed" style="margin-left:10px;margin-top:10px;width:20px;height:20px"
+            type="checkbox" />
+    </div>
+    <div>
+        <label class="form-label">
+            Użytkownik
+        </label>
+        <select formControlName="userId" class="form-control">
+            <option *ngFor="let user of users" [value]="user.id">
+                {{user.fullName}}
+            </option>
+        </select>
+        <!-- <div class="text-error-info" *ngIf="f['userId'].errors">
+            <p *ngIf="f['userId'].errors['required']">Użytkownik musi być wybrany</p>
+        </div> -->
+        <div style="margin-top:20px">
+            <button class="btn btn-outline-success">
+                Zapisz
+            </button>
+        </div>
+        <div *ngIf="isValidationError" class="alert alert-danger">
+            Wystąpił błąd walidacji!
+        </div>
+    </div>
+</form>

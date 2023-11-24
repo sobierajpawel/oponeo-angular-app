@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { UserDetailsParentComponent } from './user-details/user-details-parent/user-details-parent.component';
 import { AddTodoItemComponent } from './add-todo-item/add-todo-item.component';
+import { EditTodoItemComponent } from './edit-todo-item/edit-todo-item.component';
 
 const routes: Routes = [
   { path: "users", component: UsersListComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: "edit-users/:id", component: EditUserComponent },
   { path: "detail-user/:id", component: UserDetailsParentComponent },
   { path: "add-todo-item", component: AddTodoItemComponent },
+  { path: "todo-item/edit/:todo_id", component: EditTodoItemComponent},
   { path: "", redirectTo: "/home", pathMatch: "full" }
 ];
 

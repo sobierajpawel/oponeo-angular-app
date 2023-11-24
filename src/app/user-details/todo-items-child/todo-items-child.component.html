@@ -1,6 +1,14 @@
 <h4>Lista zadań do realizacji</h4>
+<div class="col-6" style="margin-top:10px;margin-bottom:10px;">
+    <label>Wybierz rodzaj zadań do wyświetlenia</label>
+    <select [(ngModel)]="selectedMode" (change)="changeMode()" class="form-control">
+        <option *ngFor="let mode of modes" [value]="mode.value">{{ mode.desc }}</option>
+    </select>
+</div>
 <ul class="list-group" style="height: 200px;overflow-y: scroll;">
     <li class="list-group-item todo-item"
+        style="cursor:pointer"
+        [routerLink]="'/todo-item/edit/'+item.id"
         [ngClass]="{'list-group-item-success': item.completed, 'list-group-item-danger': !item.completed}"
         *ngFor="let item of items">
         {{item.title}}

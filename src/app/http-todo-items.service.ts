@@ -15,8 +15,18 @@ export class HttpTodoItemsService {
     return this.httpClient.get<TodoItem[]>(url);
   }
 
+  getTodoItem(id : number){
+    let url = `https://jsonplaceholder.typicode.com/todos/${id}`; 
+    return this.httpClient.get<TodoItem>(url);
+  }
+
   postTodoItem(todoItem : TodoItem){
     let url = "https://jsonplaceholder.typicode.com/todos";
     return this.httpClient.post<TodoItem>(url,todoItem);
+  }
+
+  putTodoItem(todoItem : TodoItem){
+    let url = `https://jsonplaceholder.typicode.com/todos/${todoItem.id}`;
+    return this.httpClient.put<TodoItem>(url,todoItem);
   }
 }

@@ -18,6 +18,7 @@ import { TodoItemsChildComponent } from './user-details/todo-items-child/todo-it
 import { ButtonsChildComponent } from './user-details/buttons-child/buttons-child.component';
 import { FormUserComponent } from './form-user/form-user.component';
 import { AddTodoItemComponent } from './add-todo-item/add-todo-item.component';
+import { EditTodoItemComponent } from './edit-todo-item/edit-todo-item.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { AddTodoItemComponent } from './add-todo-item/add-todo-item.component';
     TodoItemsChildComponent,
     ButtonsChildComponent,
     FormUserComponent,
-    AddTodoItemComponent
+    AddTodoItemComponent,
+    EditTodoItemComponent
   ],
   imports: [
     BrowserModule,
